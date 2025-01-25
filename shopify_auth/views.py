@@ -50,7 +50,7 @@ def authenticate(request, *args, **kwargs):
 
         redirect_uri = request.build_absolute_uri(reverse(finalize))
         scope = settings.SHOPIFY_APP_API_SCOPE
-        permission_url = shopify.Session(shop.strip(), getattr(settings, 'SHOPIFY_APP_API_VERSION', 'unstable')).create_permission_url(scope, redirect_uri)
+        permission_url = shopify.Session(shop.strip(), getattr(settings, 'SHOPIFY_APP_API_VERSION', 'unstable')).create_permission_url(redirect_uri, scope)
 
         # Non-Embedded Apps should use a standard redirect.
         return HttpResponseRedirect(permission_url)
